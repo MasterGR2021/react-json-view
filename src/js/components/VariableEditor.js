@@ -134,7 +134,16 @@ class VariableEditor extends React.PureComponent {
                 {onEdit !== false && editMode == false ? this.getEditIcon() : null}
                 {onDelete !== false && editMode == false ? this.getRemoveIcon() : null}
                 {customActions.map(({ icon, onClick }, index) => (
-                    <span key={index} onClick={() => onClick(variable)} className="custom-action">
+                    <span
+                        key={index}
+                        onClick={() => {
+                        onClick({
+                            ...variable,
+                            path: [...namespace, variable.name],
+                        });
+                        }}
+                        className="custom-action"
+                    >
                         {icon}
                     </span>
                 ))}
